@@ -1,0 +1,154 @@
+---
+title: "hw01-Justin-Nelson"
+output: github_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this
+
+```{r}
+# load data file
+load("data/nba2017-salary-points.RData")
+# list the available objects
+ls()
+
+
+
+salary_millions <- round(salary / 1000000, digits = 2)
+
+experience <- gsub("R", 0, experience)
+experience <- as.integer(experience)
+class(experience)
+
+position <- as.factor(position)
+class(position)
+library(plyr)
+position <- revalue(position, c("C" = "center", "SF" = "small_fwd", "PF" = "power_fd", "SG" = "shoot_guard", "PG" = "point_guard"))
+position
+table(position)
+plot(points, salary_millions, main = "Scatter Plot of Points vs Salary", xlab = "Points", ylab = "Salary (in Millions)")
+
+num_individuals <- length(player)
+points_mean <- sum(points) / num_individuals
+salary_mean <- sum(salary_millions) / num_individuals
+
+points_var <-(1 / (num_individuals - 1)) * sum((points - points_mean) ** 2)
+
+
+salary_var <-(1 / (num_individuals - 1)) * sum((salary_millions - salary_mean) ** 2)
+
+points_sd <- sqrt(points_var)
+salary_sd <- sqrt(salary_var)
+
+cov <- (1 / (num_individuals - 1)) * sum((points - points_mean) * (salary_millions - salary_mean))
+
+correlation <- cov / (points_sd * salary_sd)
+correlation
+
+slope <- correlation * (salary_sd / points_sd)
+
+intercept <- salary_mean - (slope * points_mean)
+slope
+predicted_vals <- intercept + (slope * (points))
+```
+The regression equation is `r predicted_vals`
+```{r}
+#Write Up on Regression
+summary(predicted_vals)
+
+
+#I interpet the slope of the coefficient to mean that for every additional point scored, we can expect salary to increase by the value of the slope, which, when adjusted back to its original scale, is 8556.68 (dollars).
+
+#I interpet the intercept term as what the "base" salary is for a player if they were to score 0 points.
+
+predic_0 <- intercept + (slope * (0))
+predic_100 <- intercept + (slope * (100))
+predic_500 <- intercept + (slope * (500))
+predic_1000 <- intercept + (slope * (1000))
+predic_2000 <- intercept + (slope * (2000))
+predic_0
+predic_100
+predic_500
+predic_1000
+predic_2000
+
+
+plot(points, salary_millions, main = "Scatter Plot of Points vs Salary", xlab = "Points", ylab = "Salary (in Millions)")
+abline(intercept, slope, lwd = 2, col = "blue")
+lines(lowess(points, salary_millions), col = "red", lwd = 2)
+text(2300, 30, "lowess")
+text(2300, 15, "regression")
+
+#Residuals
+residual <- predicted_vals - salary_millions
+summary(residual)
+rss <- sum((predicted_vals - salary_millions) ** 2)
+tss <- sum((salary_millions - salary_mean) ** 2)
+r_squared <- 1 - (rss / tss)
+r_squared
+
+#Exploring Position Experience
+plot(experience, salary_millions)
+lines(lowess(experience, salary_millions), col = "red")
+
+require("scatterplot3d")
+library("scatterplot3d")
+
+#3d Scatterplot
+scatterplot3d(points, experience, salary_millions)
+#This 3d Scatterplot allows us to take a further look into players' salaries by looking at 3 variables at once. Instead of only looking at points and salary, we are also now able to compare the amount of experience a player has too, giving more granularity to the greater picture.
+
+#Conditional Boxplot
+boxplot(salary_millions ~ position)
+#From this, we can see that Centers have the largest interquartile ranges of salaries in terms of
+#salary, while power forwards, point guards, and shooting guards all have about the same. Additionally, centers hold the largest majority of the highest paid positions.
+
+#Experience does seem to be related to salary - While it somewhat hard to read a 3d graph on a 2d screen, it appears that as experience increases, salary (generally) does as well.
+
+#Positions does seem to be related to salary, whether it be where the upper quartiles lay, lower quartiles lay, the size of the interquartile range (u,e, center vs power_fd), or where salaries cap out at.
+
+##Reflections / comments
+```
+
+1.Nothing was exceptionally hard that we've covered class.
+2. Creating scatter plots.
+3. Git seems very usable once you learn it, but as of right now I'm still learning the reigns.
+4. GitHub is a pretty cool and unique service. Big fan.
+5. I needed a lot of help. I spent most of my time on the itnernet this homework on stack exchange looking at how to tackle these problems.
+6. A bit over 3 hours.
+7. Learning how to use graphing packages and using the proper syntax.
+8. No.
+9. Yes, some syntax on the graphing commands are so minute, yet the graphs fail unless its perfect.
+10. Data analysis is always fun.
+
+
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+```
+
