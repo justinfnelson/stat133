@@ -58,7 +58,7 @@ intercept <- salary_mean - (slope * points_mean)
 slope
 predicted_vals <- intercept + (slope * (points))
 ```
-The regression equation is `r predicted_vals`
+The regression equation is `r intercept` + `r slope` * # Points.
 ```{r}
 #Write Up on Regression
 summary(predicted_vals)
