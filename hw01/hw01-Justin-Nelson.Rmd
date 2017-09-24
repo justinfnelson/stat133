@@ -33,13 +33,13 @@ library(plyr)
 position <- revalue(position, c("C" = "center", "SF" = "small_fwd", "PF" = "power_fd", "SG" = "shoot_guard", "PG" = "point_guard"))
 position
 table(position)
-plot(points, salary_millions, main = "Scatter Plot of Points vs Salary", xlab = "Points", ylab = "Salary (in Millions)")
+plot(points, salary_millions, main = "Scatter Plot of Points vs Salary", xlab = "Points", ylab = "Salary (in Millions)", col = "blue", cex = .5, pch = 10)
 
 num_individuals <- length(player)
 points_mean <- sum(points) / num_individuals
 salary_mean <- sum(salary_millions) / num_individuals
 
-points_var <-(1 / (num_individuals - 1)) * sum((points - points_mean) ** 2)
+points_var <-c(1 / (num_individuals - 1)) * sum((points - points_mean) ** 2)
 
 
 salary_var <-(1 / (num_individuals - 1)) * sum((salary_millions - salary_mean) ** 2)

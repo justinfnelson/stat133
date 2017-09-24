@@ -141,7 +141,7 @@ table(position)
     ##          89          89          85          83          95
 
 ``` r
-plot(points, salary_millions, main = "Scatter Plot of Points vs Salary", xlab = "Points", ylab = "Salary (in Millions)")
+plot(points, salary_millions, main = "Scatter Plot of Points vs Salary", xlab = "Points", ylab = "Salary (in Millions)", col = "blue", cex = .5, pch = 10)
 ```
 
 ![](hw01-Justin-Nelson_files/figure-markdown_github/unnamed-chunk-1-1.png)
@@ -151,7 +151,7 @@ num_individuals <- length(player)
 points_mean <- sum(points) / num_individuals
 salary_mean <- sum(salary_millions) / num_individuals
 
-points_var <-(1 / (num_individuals - 1)) * sum((points - points_mean) ** 2)
+points_var <-c(1 / (num_individuals - 1)) * sum((points - points_mean) ** 2)
 
 
 salary_var <-(1 / (num_individuals - 1)) * sum((salary_millions - salary_mean) ** 2)
