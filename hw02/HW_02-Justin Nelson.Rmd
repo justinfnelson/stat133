@@ -1,0 +1,108 @@
+---
+title: "HW_02 - Justin Nelson"
+output: github_document
+---
+
+```{r setup, include=FALSE}
+require(knitr)
+knitr::opts_chunk$set(echo = TRUE)
+opts_knit$set(root.dir = "/Users/JustinNelson/Desktop/Junior Fall/Stat 133/stat133-hws-fall17/hw02/data")
+library(ggplot2)
+library(dplyr)
+```
+
+```{r}
+dat <- read.csv(file="nba2017-player-statistics.csv")
+colnames(dat)
+position <- factor(c('C', 'PF', 'PG', 'SF', 'SG'))
+position
+dat <- read.csv(file="nba2017-player-statistics.csv", colClasses = c('character', 'character', "factor", 'character', 'double', rep("integer", 19)))
+
+str(dat)
+```
+
+```{r}
+library(readr)
+data <- read_csv(file="nba2017-player-statistics.csv", col_types = list(Position = col_factor(c('C', 'PF', 'PG', 'SG', 'SF'))))
+str(data)
+```
+
+```{r}
+data$Experience <- gsub('R', 1, data$Experience)
+data <- transform(data, Experience = as.integer(Experience))
+str(data)
+```
+
+```{r}
+data$Missed_FG <- data$FGA - data$FGM
+data$Missed_FT <- data$FTA - data$FTM
+data$PTS <- (data$Points2 * 2) + (data$FTM * 1) + (data$Points3 * 3)
+data$REB <- data$OREB + data$DREB
+data$MPG <- data$MIN / data$GP
+data$EFF <- (data$PTS + data$REB + data$AST + data$STL + data$BLK - data$Missed_FG - data$Missed_FT - data$TO) / data$GP
+summary(data$EFF)
+hist(data$EFF)
+
+top_10 <- slice(arrange(select(data, Player, Team, Salary, EFF), desc(EFF)), 1:10)
+top_10
+
+neg <- select(filter(data, EFF < 0), Player, EFF)
+neg
+
+cpts <- cor(data$EFF, data$PTS)
+creb <- cor(data$EFF, data$REB)
+cast <- cor(data$EFF, data$AST)
+cblk <- cor(data$EFF, data$BLK)
+cmfg <- -cor(data$EFF, data$Missed_FG)
+cmft <- -cor(data$EFF, data$Missed_FT)
+cto <- -cor(data$EFF, data$TO)
+cgp <- cor(data$EFF, data$GP)
+
+cpts
+creb
+cast
+cblk
+cmfg
+cmft
+cto
+cgp
+
+correlations <- sort((c(cpts, creb, cast, cblk, cmfg, cmft, cto)), decreasing = TRUE)
+correlations
+barplot(correlations, names.arg = c('points', 'rebs', 'asst', 'blocks', 'mfg', 'mft', 'TO'))
+
+```
+```{r}
+eff_salary_graph <- ggplot(data, aes(x = EFF, y = Salary)) + geom_point() + geom_smooth(method = "loess")
+eff_salary_graph
+
+eff_salary_corr <- cor(data$EFF, data$Salary)
+eff_salary_corr
+
+#This graph and the correlation tells us that there is a positive, and somewhat strong correlation between EFF and salary - aka, the better a player is as determined by the EFF metric, they get paid more.
+
+players2 <- filter(data, MPG > 20)
+players2_graph <- ggplot(players2, aes(x = EFF, y = Salary)) + geom_point() + geom_smooth(method = "loess")
+players2_graph
+
+players2_cor <- cor(players2$EFF, players2$Salary)
+players2_cor
+
+#To my surprise, there is actually a lower correlation between "established" players EFF and salary. Upon further thought, this makes sense because teams are likely willing to pay high-promising rookies a huge amount of money to lock them in, despite them not proving their worth in the NBA yet. Those who are more established have lower long-term potential due to their age, and also the "hype" around them has probably diminished.
+```
+
+Nothing was exceptionally hard.
+
+Grasping ggplot was easy after doing today's lab.
+
+Like homework 1, I referenced online internet forums like stackexchange a lot to help me out with syntax to complete problems in this homework.
+
+About 2.5 hours.
+
+It was all about equally distributed.
+
+Nothing stumped me entirely.
+
+Nothing frustrating in particular.
+
+This analysis and the results that came out of them were actually pretty interesting and not something I expected. I genuinely enjoyed this assignment.
