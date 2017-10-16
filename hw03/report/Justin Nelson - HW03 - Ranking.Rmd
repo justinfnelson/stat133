@@ -1,11 +1,13 @@
 ---
 title: "Justin Nelson - HW03"
-output: html_document
+output: github_document
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
-
+library(dplyr)
+library(ggplot2)
+teams <- read.csv('../data/nba2017-teams.csv')
 ```
 
 ```{r}
@@ -18,7 +20,7 @@ ggplot(ranked_sal, aes(x = reorder(team, salary), y = salary)) + geom_bar(stat =
 ```
 Cleveland has the highest total salary standing at just a bit above 120 million last season, while Philadelphia sits in last with around 60 million, which is less than half of what Cleveland is playing. About 5 teams fall directly on the average, and the rest are about evenly distributed on either side of the average.
 ```{r}
-dat
+
 ranked_points <- teams %>%
   arrange(desc(points_total))
 ranked_points
@@ -37,8 +39,6 @@ ggplot(ranked_eff, aes(x = reorder(team, efficiency), y = efficiency)) + geom_ba
 ```
 Similar to the total points ranking, there is not as much variance in this ranking scale as there was in total salary. Most teams fall close to average. This also makes sense for a similar reason as it did for total points - all players in the NBA are going to be relatively 'efficient', otherwise they wouldn't be in the NBA. It's the slight differences in people's efficiencies that generate the large differences in salaries paid.
 ```{r}
-install.packages(stats)
-library(stats)
 help(princomp)
 pca_vars <- teams %>%
   select(points3, points2, free_throws, off_rebounds, def_rebounds, assists, steals, blocks, turnovers, fouls)

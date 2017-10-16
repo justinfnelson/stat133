@@ -1,0 +1,57 @@
+---
+title: "hw01-Justin-Nelson"
+output: github_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this
+
+```{r}
+# load data file
+load("data/nba2017-salary-points.RData")
+# list the available objects
+ls()
+
+
+
+salary_millions <- round(salary / 1000000, digits = 2)
+
+experience <- gsub("R", 0, experience)
+experience <- as.integer(experience)
+class(experience)
+
+position <- as.factor(position)
+class(position)
+library(plyr)
+position <- revalue(position, c("C" = "center", "SF" = "small_fwd", "PF" = "power_fd", "SG" = "shoot_guard", "PG" = "shoot_guard"))
+position
+table(position)
+salary
+plot(points, salary_millions, main = "Scatter Plot of Points vs Salary", xlab = "Points", ylab = "Salary (in Millions)")
+
+num_individuals <- length(player)
+points_mean <- sum(points) / num_individuals
+salary_mean <- sum(salary) / num_individuals
+
+points_var <-(1 / (num_individuals - 1)) * sum((points - points_mean) ** 2)
+
+
+salary_var <-(1 / (num_individuals - 1)) * sum((salary - salary_mean) ** 2)
+
+points_sd <- sqrt(points_var)
+salary_sd <- sqrt(salary_var)
+
+cov <- (1 / (num_individuals - 1)) * (sum
+                                      
+                                      
+(points - points_mean)
+(salary - salary_mean)
+```
+
