@@ -1,0 +1,18 @@
+---
+title: "nba2017-roster-dictionary.md"
+output: github_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+nba2017-roster.csv - Data Dictionary
+
+Player - name of player (character)
+Team - name of team (factor)
+position - position of player (factor)
+height - height of player (numeric)
+weight - weight of player (numeric)
+age - age of player (numeric)
+experience - # years player has been in NBA (numeric)
+salary - annual alary of player (numeric)

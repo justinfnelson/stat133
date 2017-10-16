@@ -1,0 +1,76 @@
+---
+title: "Justin Nelson - HW03"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+```
+
+```{r}
+ranked_sal <- arrange(teams, desc(salary))
+ranked_sal
+mean_sal <- mean(ranked_sal$salary)
+mean_sal
+help(reorder)
+ggplot(ranked_sal, aes(x = reorder(team, salary), y = salary)) + geom_bar(stat = 'identity') + coord_flip() + ggtitle('NBA Teams Ranked by Total Salary') + geom_hline(yintercept = mean_sal, col = 'red') + xlab('Teams') + ylab('Salary (in millions)')
+```
+Cleveland has the highest total salary standing at just a bit above 120 million last season, while Philadelphia sits in last with around 60 million, which is less than half of what Cleveland is playing. About 5 teams fall directly on the average, and the rest are about evenly distributed on either side of the average.
+```{r}
+dat
+ranked_points <- teams %>%
+  arrange(desc(points_total))
+ranked_points
+mean_points <- mean(ranked_points$points_total)
+mean_points
+ggplot(ranked_points, aes(x = reorder(team, points_total), y = points_total)) + geom_bar(stat = 'identity') + coord_flip() + ggtitle('NBA Teams Ranked by Total Points') + geom_hline(yintercept = mean_points, col = 'red') + xlab('Teams') + ylab('Total Points')
+```
+The rankings of total points does not very nearly as much as total salary paid out. Most teams fall somewhat close within average, exlucing a few outliers on either end of the spectrum. This makes sense because most games aren't huge blowouts, and even when the worst team plays the best team, the bad team will still be putting up points.
+
+```{r}
+ranked_eff <- arrange(teams, desc(efficiency))
+ranked_eff
+mean_eff <- mean(ranked_eff$efficiency)
+mean_eff
+ggplot(ranked_eff, aes(x = reorder(team, efficiency), y = efficiency)) + geom_bar(stat = 'identity') + coord_flip() + ggtitle('NBA Teams Ranked by Total Efficiency') + geom_hline(yintercept = mean_eff, col = 'red') + xlab('Teams') + ylab('Total Efficiency')
+```
+Similar to the total points ranking, there is not as much variance in this ranking scale as there was in total salary. Most teams fall close to average. This also makes sense for a similar reason as it did for total points - all players in the NBA are going to be relatively 'efficient', otherwise they wouldn't be in the NBA. It's the slight differences in people's efficiencies that generate the large differences in salaries paid.
+```{r}
+install.packages(stats)
+library(stats)
+help(princomp)
+pca_vars <- teams %>%
+  select(points3, points2, free_throws, off_rebounds, def_rebounds, assists, steals, blocks, turnovers, fouls)
+pca_vars
+pca <- prcomp(x = pca_vars, scale. = TRUE)
+names(pca)
+ev <- pca$sdev ^ 2
+props <- ev / sum(ev)
+cumprop <- cumsum(props)
+
+eigenvals <- data.frame(ev, props, cumprop)
+eigenvals
+
+PC1 <- pca$x[1:30]
+PC2 <- pca$x[31:60]
+
+plot_frame <- data.frame(PC1, PC2, teams = teams$team)
+plot_frame
+
+ggplot(plot_frame, aes(PC1, PC2)) + geom_point(alpha = .01) + geom_text(aes(label = teams)) + ggtitle('PCA plot (PC1 and PC2)')
+
+```
+```{r}
+PC1_new <- 100 * ((PC1 - min(PC1)) / (max(PC1) - min(PC1)))
+PC1_new
+
+bar_df <- data.frame('PC1 New' = PC1_new, teams = teams$team)
+bar_df
+
+mean_pc <- mean(PC1_new)
+mean_pc
+
+ggplot(bar_df, aes(x = reorder(teams, PC1_new), y = PC1_new)) + geom_bar(stat = 'identity') + coord_flip() + ggtitle('NBA Teams Ranked by Scaled PC1') + xlab('Teams') + ylab('First PC (scaled from 0 to 100)')
+```
+According to this PC1 index that we're using to rank teams, Golden State has by far and away the highest ranking, standing at nearly 1/4 above the next closest team (Minnesota). This scaled PC differs greatly in results from something like the teams based on salary, where a team like Philadelphia was ranked at the bottom, but in this ranking they're closer to the middle.
