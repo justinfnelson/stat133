@@ -1,4 +1,4 @@
-# HW03 - Ranking NBA Teams
+# HW03 - Ranking NBA Teams - Justin Nelson
 
 The purpose of this HW is to try to rank NBA teams in a fashion which excludes total team statistics and performance, but rather the performance from individual players.
 
