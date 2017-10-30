@@ -38,7 +38,7 @@ install.packages('plot3D', repos = "http://cran.us.r-project.org")
 
     ## 
     ## The downloaded binary packages are in
-    ##  /var/folders/js/hj1wjrjs1wvgpcxfj411hp1r0000gn/T//RtmppbPl1h/downloaded_packages
+    ##  /var/folders/js/hj1wjrjs1wvgpcxfj411hp1r0000gn/T//RtmpAgQWt3/downloaded_packages
 
 With the package now installed on your machine, you can load it and start using it with the library() function.
 
@@ -168,7 +168,7 @@ gdp
 scatter3D(as.numeric(gdp$GDP.Chained.2009.Dollars), as.numeric(gdp$Year), as.numeric(gdp$GDP.Current.Dollar), xlab = 'GDP 2009 Dollars', ylab = 'Year (1929-2016)', zlab = 'GDP Current Dollar', colkey = NULL, col = NULL, colvar = NULL)
 ```
 
-![](Post_01_-_Justin_Nelson_files/figure-markdown_github/unnamed-chunk-4-1.png) ![3Dplot](Images/unnamed-chunk-4-1.png)
+![](Post_01_-_Justin_Nelson_files/figure-markdown_github/unnamed-chunk-4-1.png)
 
 From this graph, we can see that, in general, GDP in current dollars and GDP in 2009 chained dollars rose in unison. This did not hold true during the 1970's when the US was experiencing inflation rates that were far above standard (&gt;10%). It's also interesting to note the stark dropoff in both forms of GDP during the early 1930's (early part of Y-axis) when the Great Depression occurred.
 
@@ -192,7 +192,7 @@ install.packages('quantmod', repos = "http://cran.us.r-project.org")
 
     ## 
     ## The downloaded binary packages are in
-    ##  /var/folders/js/hj1wjrjs1wvgpcxfj411hp1r0000gn/T//RtmppbPl1h/downloaded_packages
+    ##  /var/folders/js/hj1wjrjs1wvgpcxfj411hp1r0000gn/T//RtmpAgQWt3/downloaded_packages
 
 ``` r
 #Load the package so we can use it
@@ -242,7 +242,7 @@ Let's take a quick look at a chart of this stock's performance since it's incept
 barChart(NVDA)
 ```
 
-![](Post_01_-_Justin_Nelson_files/figure-markdown_github/unnamed-chunk-7-1.png) ![year](Images/unnamed-chunk-7-1.png)
+![](Post_01_-_Justin_Nelson_files/figure-markdown_github/unnamed-chunk-7-1.png)
 
 That's handy, but it's nothing that we couldn't find online without relative ease.
 
@@ -254,7 +254,7 @@ one_yr <- NVDA['2016-10-30::']
 lineChart(one_yr)
 ```
 
-![](Post_01_-_Justin_Nelson_files/figure-markdown_github/unnamed-chunk-8-1.png) ![one\_year](Images/unnamed-chunk-8-1.png)
+![](Post_01_-_Justin_Nelson_files/figure-markdown_github/unnamed-chunk-8-1.png)
 
 That's some impressive growth for a stock! How much exactly is it though?
 
@@ -286,7 +286,7 @@ Before finding the number of weeks that the stock went positive, let's take a lo
 chartSeries(weekly)
 ```
 
-![](Post_01_-_Justin_Nelson_files/figure-markdown_github/unnamed-chunk-11-1.png) ![weekly](Images/unnamed-chunk-11-1.png)
+![](Post_01_-_Justin_Nelson_files/figure-markdown_github/unnamed-chunk-11-1.png)
 
 Overall, this looks strong with mostly positive weeks and some negatives. Let's find the exact value of positive weeks:
 
