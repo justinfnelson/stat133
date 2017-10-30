@@ -1,6 +1,6 @@
 ---
 title: "R - The Power of Open Source Packages"
-output: html_document
+output: github_document
 ---
 
 ```{r setup, include=FALSE}
