@@ -1,0 +1,18 @@
+library(shiny)
+runGitHub("stat133-hws-fall17", "justinfnelson", subdir = "hw04/app")
+
+########################################################################################
+Within the contents of the hw04 directory, you’ll find the subdirectories ‘app’, ‘code’, ‘data’, and ‘output.
+
+The overall goal of this homework was to summarize and visualize statistics on the performance of make-believe Stat 133 students across all of their assignments, along with their final grade.
+
+The data directory contains both raw and clean data. The raw data was provided and the clean data not only contains fixes for the “errors” in the raw data, but also additional variables that helped scale and quantify students’ performance.
+
+The code folder contains an R script of user created functions that were used to help clean the data. There is also a script that was used to test the functions. Finally, the file ‘clean-data-script.R’ was used to clean and finalize the data for analysis.
+
+The output folder contains summary statistics on various assignments and final grades.
+
+The app directory contains a shiny app script file that allows the user to interactively interpret the performance of students via 3 different visualizations.
+
+
+

@@ -1,0 +1,33 @@
+##Data Dictionary - HW04 CleanScores Dataset
+
+Source of data: A cleaned and modified version of the data provided from: 
+https://github.com/ucb-stat133/stat133-fall-2017/blob/master/data/rawscores.csv
+
+
+
+This data table contains scores on various class assignments and grading points for fictitious students of a Stat 133 class. The different scores for assignments are outlined below: 
+
+HW1: First homework, 0-100 points
+HW2: Second homework, 0-100 points
+HW3: Third homework, 0-100 points
+HW4: Fourth homework, 0-100 points
+HW5: Fifth homework, 0-100 points
+HW6: Sixth homework, 0-100 points
+HW7: Seventh homework, 0-100 points
+HW8: Eigth homework, 0-100 points
+HW9: Ninth homework, 0-100 points
+ATT: Total number of labs attended, 0-12 possible
+QZ1: First Quiz, 0-12 points
+QZ2: Second Quiz, 0-18 points
+QZ3: Third Quiz, 0-20 points
+QZ4: Fourth Quiz, 0-20 points
+EX1: First exam, 0-80 points
+EX2: Second exam, 0-90 points
+Test1: A rescaled score of EX1, 0-100 points.
+Test2:A rescaled score of EX2, 0-100 points.
+Homework: Final homework score calculated by dropping lowest and averaging remaining. 0-100 points.
+Quiz: Final quiz score calculated by dropping lowest and averaging remaining. 0-100 points.
+Lab: Rescaled lab grade as determined by the grading scale based on ATT. 0-100 points.
+Overall: Final overall score for the class, calculated with specific weights on each category. 0-100 Points.
+Grade: Final letter grade in the course as decided by overall point score, scale given by Professor Sanchez.
+
