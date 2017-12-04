@@ -4,13 +4,14 @@ Introduction
 In class we've learned a variety of useful ways to interpret our data
 through more traditional visualizations such as histograms, line graphs,
 and barplots. However, one useful data visualization technique that we
-have not explored is the plotting of data onto geographical maps. Often
-times you'll run across datasets that will give statistics as they
-pertain to specific geographical regions. While you may able to conduct
-analysis on each individual region and then try to make sense of the
-results within a written table, it is often helpful to visualize the
-analysis results on a familiar geographical map. This is where we can
-utilize the combination of the maps and ggplot2 package to our benefit.
+only skimmed the surface of in lab11 was the plotting of data onto
+geographical maps. Often times you'll run across datasets that will give
+statistics as they pertain to specific geographical regions. While you
+may able to conduct analysis on each individual region and then try to
+make sense of the results within a written table, it is often helpful to
+visualize the analysis results on a familiar geographical map. This is
+where we can utilize the combination of the maps and ggplot2 package to
+our benefit.
 
 Motivation
 ==========
@@ -144,7 +145,7 @@ performance tends to go down. Let's take a look at a plot of this:
 
     ggplot(dat, aes(x=dollars, y=SAT)) + geom_point() + labs(x='Spending in $1000 per student', y = 'SAT Score') + geom_smooth(method = 'lm')
 
-![](Post_02_-_Mapping_Data_files/figure-markdown_strict/unnamed-chunk-5-1.png)
+![](Post-02-Justin-Nelson_files/figure-markdown_strict/unnamed-chunk-5-1.png)
 
 One reason that comes to mind as to why this may be is that if a state
 has a high rate of students who are struggling on standardized tests,
@@ -175,7 +176,7 @@ ggplot and geom\_polygon on the dataset to generate a basic map.
 
     us
 
-![](Post_02_-_Mapping_Data_files/figure-markdown_strict/unnamed-chunk-6-1.png)
+![](Post-02-Justin-Nelson_files/figure-markdown_strict/unnamed-chunk-6-1.png)
 
 We now have two data frames - one with information on educational
 attainment, and one with data on geographical locations. Both of them
@@ -214,7 +215,10 @@ turn full state names into abbreviations).
 
 With the tables now joined, we can generate the map. We'll make maps
 that display funding in each state, percentage of students who take the
-SAT in each state, and performance on the SAT in each state.
+SAT in each state, and performance on the SAT in each state. To make
+each map represent the variable we're interested in, we'll set the
+'fill' argument within the aesthetics parameter to the column of data we
+want to look at on our map.
 
 (Notice that there are several black states. These are states in which
 there was no data aviailable.)
@@ -233,15 +237,15 @@ there was no data aviailable.)
 
     funding_map
 
-![](Post_02_-_Mapping_Data_files/figure-markdown_strict/unnamed-chunk-9-1.png)
+![](Post-02-Justin-Nelson_files/figure-markdown_strict/unnamed-chunk-9-1.png)
 
     take_map
 
-![](Post_02_-_Mapping_Data_files/figure-markdown_strict/unnamed-chunk-9-2.png)
+![](Post-02-Justin-Nelson_files/figure-markdown_strict/unnamed-chunk-9-2.png)
 
     score_map
 
-![](Post_02_-_Mapping_Data_files/figure-markdown_strict/unnamed-chunk-9-3.png)
+![](Post-02-Justin-Nelson_files/figure-markdown_strict/unnamed-chunk-9-3.png)
 
 Discussion
 ==========
